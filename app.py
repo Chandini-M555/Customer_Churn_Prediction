@@ -1,16 +1,21 @@
+#4. Streamlit Application:
+#Create a simple Streamlit app
+#Take user inputs for customer details
+#Display churn prediction result (Churn / No Churn)
+
 import streamlit as st
 import pickle
 import numpy as np
 
 # Load model
-with open("logistic_model.pkl","rb") as f:
-    model = pickle.load(f)
+with open("logistic_model.pkl","rb") as file:
+    model = pickle.load(file)
 
 # Load scaler
-with open("scaler.pkl","rb") as f:
-    scaler = pickle.load(f)
+with open("scaler.pkl","rb") as file2:
+    scaler = pickle.load(file2)
 
-# ----- Center Title -----
+# Center Title 
 st.markdown(
     "<h1 style='text-align: center;'>Customer Churn Prediction</h1>",
     unsafe_allow_html=True
@@ -21,7 +26,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ----- Center Image -----
+# Center Image 
 col1, col2, col3 = st.columns([1,2,1])
 
 with col2:
@@ -32,7 +37,7 @@ with col2:
 
 st.write("")
 
-# ----- Two Column Layout -----
+#  Two Column Layout 
 col1, col2 = st.columns(2)
 
 with col1:
@@ -102,7 +107,7 @@ with col2:
     monthlycharges = st.number_input("Monthly Charges")
     totalcharges = st.number_input("Total Charges")
 
-# ----- Convert Inputs to Numbers -----
+#  Convert Inputs to Numbers 
 
 gender = 1 if gender=="Male" else 0
 senior = 1 if senior=="Yes" else 0
@@ -126,14 +131,14 @@ contract = ["Month-to-month","One year","Two year"].index(contract)
 
 paymentmethod = ["Electronic check","Mailed check","Bank transfer","Credit card"].index(paymentmethod)
 
-# ----- Center Predict Button -----
+# Center Predict Button 
 
 c1, c2, c3 = st.columns([1,2,1])
 
 with c2:
     predict = st.button("Predict Churn")
 
-# ----- Prediction -----
+#  Prediction 
 
 if predict:
 
